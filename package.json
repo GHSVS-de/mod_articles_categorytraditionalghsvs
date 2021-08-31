@@ -54,7 +54,7 @@
 		"articles"
 	],
 	"private": false,
-	"description": "Joomla site module. Display copyright informations, e.g. in page footer.",
+	"description": "Joomla site module from early days but still used on some sites. Whyever.",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
