@@ -1,4 +1,7 @@
 <?php defined('_JEXEC') or die;
+
+use Joomla\Module\ArticlesCategoryTraditionalGhsvs\Site\Helper\ArticlesCategoryTraditionalGhsvsHelper;
+
 // Unterseiten-Pagination der Startseite ausschließen.
 $start = (int) JUri::getInstance()->getVar('start');
 if ($start)
@@ -24,7 +27,7 @@ $blogcolumns = (int) $params->get('blogcolumns', 3);
 	Carousel-.item	nicht vollständig gefüllt ist, hüpft die Seite.
  Ich muss also $rest fehlende, leere Spans hinzufügen.
 	Damit sie nach Möglichkeit nicht leer sind, versuche zufällige
-	bei hype-View nicht gehypte Haupteinträge zuzuladen. 
+	bei hype-View nicht gehypte Haupteinträge zuzuladen.
 	$rest gibt z.B. 1 bei 10 Items und 3 Spalten.
 	Fehlen also noch 2, um das .item zu füllen.
 */
@@ -37,9 +40,9 @@ if (
 	$params->set('show_front', 'only');
 	$params->set('articles_ids', implode("\r\n", PlgSystemArticleSubtitleGhsvs::getHypedArticles()));
 	$params->set('articles_ids_exclude', 'exclude');
-	
+
 	$params->set('blogcount', $rest);
-	$restList = ModArticlesCategoryTraditionalGhsvsHelper::getList($params);
+	$restList = ArticlesCategoryTraditionalGhsvsHelper::getList($params);
 	if (!empty($restList))
 	{
 		foreach ($restList as $r)
@@ -76,7 +79,7 @@ if ($needPagination)
 		$js .= '
  $(window).load(function(){
   $(' . $carouselSelectorJS . ').carousel({"interval": 6000,"pause": "false"});
-		
+
 		$(".cyclePauseButton' . $carouselSelector . '").click(function(){
 			var aktion = $(this).attr("data-playpause");
 			$(' . $carouselSelectorJS . ').carousel(aktion);
@@ -87,7 +90,7 @@ if ($needPagination)
 			 .removeClass((aktion == "cycle" ? "btn-success" : "btn-danger"))
 				.addClass((aktion == "cycle" ? "btn-danger" : "btn-success"));;
 		});';
-	 
+
 if (JPluginHelper::isEnabled('system', 'lazyloadforjoomla'))
 {
 	$js .= '
@@ -147,7 +150,7 @@ if($introcount) : ?>
 			$link = new JUri($link1);
 			$link->setVar('return', base64_encode($returnURL));
 		endif;
-		
+
   $rowcount = ((int) $key % $blogcolumns) + 1;
   if($rowcount == 1){
    $row = $counter / $blogcolumns;
@@ -238,7 +241,7 @@ else
   <div class="span<?php echo round((12 / $blogcolumns))?> itemContainer">
 		<div class="singleitem BOOTSTRAPCAROUSELRESIZE<?php echo (!$counter ? ' CAROUSELLIMITER' : '');?>">
 		</div><!--/singleitem-->
-  </div><!--/span<?php echo round((12 / $blogcolumns))?>-->				
+  </div><!--/span<?php echo round((12 / $blogcolumns))?>-->
 			<?php
 			}
 		}
@@ -249,11 +252,10 @@ else
   endif;
  endforeach; ?>
  </div><!--/carousel-inner-->
- 
-  
-  
+
+
+
 
 </div><!--/myCarousel<?php echo $module->id;?>" blogcarousel<?php echo $module->id;?> slide-->
 <?php
 endif;#$introcount ?>
-

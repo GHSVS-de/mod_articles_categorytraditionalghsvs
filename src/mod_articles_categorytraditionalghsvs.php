@@ -50,11 +50,10 @@ switch($mode)
 		break;
 }
 
-$cacheid = md5(serialize(array ($idbase, $module->module)));
-
-$cacheparams = new stdClass;
+$cacheid = md5(serialize([$idbase, $module->module, $module->id]));
+$cacheparams = new \stdClass;
 $cacheparams->cachemode = 'id';
-$cacheparams->class = 'ModArticlesCategoryTraditionalGhsvsHelper';
+$cacheparams->class = ArticlesCategoryTraditionalGhsvsHelper::class;
 $cacheparams->method = 'getList';
 $cacheparams->methodparams = $params;
 $cacheparams->modeparams = $cacheid;
@@ -79,11 +78,11 @@ if (!empty($list))
 		{
 			case 'year':
 			case 'month_year':
-				$list = ModArticlesCategoryTraditionalGhsvsHelper::groupByDate($list, $article_grouping, $article_grouping_direction, $params->get('month_year_format', 'F Y'));
+				$list = ArticlesCategoryTraditionalGhsvsHelper::groupByDate($list, $article_grouping, $article_grouping_direction, $params->get('month_year_format', 'F Y'));
 				break;
 			case 'author':
 			case 'category_title':
-				$list =ModArticlesCategoryTraditionalGhsvsHelper::groupBy($list, $article_grouping, $article_grouping_direction);
+				$list = ArticlesCategoryTraditionalGhsvsHelper::groupBy($list, $article_grouping, $article_grouping_direction);
 				break;
 			default:
 				break;

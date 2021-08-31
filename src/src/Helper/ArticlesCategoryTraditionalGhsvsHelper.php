@@ -3,16 +3,21 @@ namespace Joomla\Module\ArticlesCategoryTraditionalGhsvs\Site\Helper;
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\Component\Content\Site\Helper\RouteHelper;
-use Joomla\CMS\Router\Route;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Date\Date;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\Component\Content\Administrator\Extension\ContentComponent;
+//use Joomla\Component\Content\Site\Helper\RouteHelper;
+use Joomla\String\StringHelper;
 
 // Quick fix because otherwise setState() fails.
 if (version_compare(JVERSION, '4', 'lt'))
 {
-	JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_content/models',
+	\JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_content/models',
 		'ContentModel');
 }
 
@@ -34,7 +39,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 		$keep_br = $params->get('keep_br', '');
 
 		// Get an instance of the generic articles model
-		$articles = JModelLegacy::getInstance('Articles', 'ContentModel',
+		$articles = \JModelLegacy::getInstance('Articles', 'ContentModel',
 			array('ignore_request' => true));
 
 		// Set application parameters in model
@@ -75,7 +80,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 								if (!$catid)
 								{
 									// Get an instance of the generic article model
-									$article = JModelLegacy::getInstance('Article', 'ContentModel', array('ignore_request' => true));
+									$article = \JModelLegacy::getInstance('Article', 'ContentModel', array('ignore_request' => true));
 
 									$article->setState('params', $appParams);
 									$article->setState('filter.published', 1);
@@ -121,7 +126,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 			if ($params->get('show_child_category_articles', 0) && (int) $params->get('levels', 0) > 0)
 			{
 				// Get an instance of the generic categories model
-				$categories = JModelLegacy::getInstance('Categories', 'ContentModel', array('ignore_request' => true));
+				$categories = \JModelLegacy::getInstance('Categories', 'ContentModel', array('ignore_request' => true));
 				$categories->setState('params', $appParams);
 				$levels = $params->get('levels', 1) ? $params->get('levels', 1) : 9999;
 				$categories->setState('filter.get_children', $levels);
@@ -253,7 +258,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 			if ($access || in_array($item->access, $authorised))
 			{
 				// We know that user has the privilege to view the article
-				$item->link = Route::_(ContentHelperRoute::getArticleRoute($item->slug,
+				$item->link = Route::_(\ContentHelperRoute::getArticleRoute($item->slug,
 					$item->catslug, $item->language));
 			}
 			else
@@ -285,7 +290,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 
 			if ($item->catid)
 			{
-				$item->displayCategoryLink = Route::_(ContentHelperRoute::getCategoryRoute($item->catid));
+				$item->displayCategoryLink = Route::_(\ContentHelperRoute::getCategoryRoute($item->catid));
 				$item->displayCategoryTitle = $show_category ? '<a href="'.$item->displayCategoryLink.'">'.$item->category_title.'</a>' : '';
 			}
 			else {
