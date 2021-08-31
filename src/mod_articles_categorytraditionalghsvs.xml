@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_articles_categorytraditionalghsvs</name>
+	<author>Joomla! Project; Fallback by GHSVS</author>
+	<creationDate>February 2010; edit 2014-04 www.ghsvs.de</creationDate>
+	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail></authorEmail>
+	<authorUrl>www.joomla.org; edit www.ghsvs.de</authorUrl>
+	<!--based on original version 3.0.0-->
+	<version>2021.08.17</version>
+<versionHistory>
+2015.04.17:
+2015.07.26:
+Neuer tmpl-Override blogcarousel.php (Bootstrap-Carousel).
+Neue OPTION 'hyped' für articles_ids_exclude.
+2015.08.23: Neu: $moduleclass_tmpl, show_concated_tags
+2021.08.17: Fix for Joomla 4 and J3 in helper.php.
+</versionHistory>
+	<description>MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_XML_DESCRIPTION</description>
+
+	<files>
+		<filename module="mod_articles_categorytraditionalghsvs">mod_articles_categorytraditionalghsvs.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>language</folder>
+		<folder>media2copy</folder>
+		<filename>mod_articles_categorytraditionalghsvs.xml</filename>
+	</files>
+
+	<media folder="copy2media" destination="mod_articles_categorytraditionalghsvs">
+		<folder>css</folder>
+		<folder>js</folder>
+		<filename>index.html</filename>
+	</media>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+
+
+				<field name="mode" type="list" default="normal"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MODE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MODE_DESC"
+				>
+					<option value="normal">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_NORMAL_VALUE
+					</option>
+					<option value="dynamic">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_DYNAMIC_VALUE
+					</option>
+				</field>
+			</fieldset>
+<!--BLOG-->
+<fieldset name="blog">
+	<field name="BLOGSPACER" type="spacer" label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGSPACER_DESC" />
+
+	<field name="blog" type="radio" class="btn-group" default="1"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOG_LBL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOG_DESC">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field name="blogcolumns" type="list" class="" default="3"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGCOLUMNS_LBL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGCOLUMNS_DESC">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+	</field>
+
+	<field name="blogcount" type="text" class="" default="6"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGCOUNT_LBL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGCOUNT_DESC" />
+
+ <field name="BLOGSPACERPARAMS" type="spacer" label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_BLOGSPACERPARAMS_DESC" />
+
+ <field name="show_intro" type="radio" default="1" />
+
+	<field
+		name="show_intro"
+		type="radio" default="1"
+		class="btn-group"
+		label="JGLOBAL_SHOW_INTRO_LABEL"
+		description="Alles, außer Überschrift wird ausgeblendet!">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_title"
+		type="radio" default="1"
+		class="btn-group"
+		label="JGLOBAL_SHOW_TITLE_LABEL"
+		description="JGLOBAL_SHOW_TITLE_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="link_titles" default="0"
+		type="radio"
+		class="btn-group"
+		label="JGLOBAL_LINKED_TITLES_LABEL"
+		description="JGLOBAL_LINKED_TITLES_DESC">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+		name="info_block_position" default="0"
+		type="radio"
+		class="btn-group"
+		label="COM_CONTENT_FIELD_INFOBLOCK_POSITION_LABEL"
+		description="COM_CONTENT_FIELD_INFOBLOCK_POSITION_DESC">
+		<option value="0">COM_CONTENT_FIELD_OPTION_ABOVE</option>
+		<option value="1">COM_CONTENT_FIELD_OPTION_BELOW</option>
+		<option value="2">COM_CONTENT_FIELD_OPTION_SPLIT</option>
+	</field>
+
+	<field
+		name="link_category"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_LINK_CATEGORY_LABEL"
+		description="JGLOBAL_LINK_CATEGORY_DESC">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+		name="show_parent_category"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_PARENT_CATEGORY_LABEL"
+		description="JGLOBAL_SHOW_PARENT_CATEGORY_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="link_parent_category"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_LINK_PARENT_CATEGORY_LABEL"
+		description="JGLOBAL_LINK_PARENT_CATEGORY_DESC">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+		name="show_create_date"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_CREATE_DATE_LABEL"
+		description="JGLOBAL_SHOW_CREATE_DATE_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_modify_date"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_MODIFY_DATE_LABEL"
+		description="JGLOBAL_SHOW_MODIFY_DATE_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_publish_date"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_PUBLISH_DATE_LABEL"
+		description="JGLOBAL_SHOW_PUBLISH_DATE_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+	<field name="show_tags"
+		type="hidden" default="0"
+		class="btn-group"
+		label="COM_CONTENT_FIELD_SHOW_TAGS_LABEL"
+		description="COM_CONTENT_FIELD_SHOW_TAGS_DESC">
+		<!--<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>-->
+	</field>
+
+	<field name="show_concated_tags"
+		type="list" default="0"
+		label="Show concated tags"
+		description="Nicht verlinkt, kommasepariert">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_icons"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_ICONS_LABEL"
+		description="JGLOBAL_SHOW_ICONS_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_print_icon"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_PRINT_ICON_LABEL"
+		description="JGLOBAL_SHOW_PRINT_ICON_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="show_email_icon"
+		type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_EMAIL_ICON_LABEL"
+		description="JGLOBAL_SHOW_EMAIL_ICON_DESC">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+	<field
+		name="show_image_intro"
+		type="radio" default="1" class="btn-group"
+		label="Introbild anzeigen"
+		description="">
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+	<field name="float_intro"
+		type="list" default="left"
+		label="COM_CONTENT_FLOAT_LABEL"
+		description="COM_CONTENT_FLOAT_DESC">
+			<option value="right">COM_CONTENT_RIGHT</option>
+			<option value="left">COM_CONTENT_LEFT</option>
+			<option value="none">JNONE</option>
+	</field>
+</fieldset>
+<!--/BLOG-->
+<!--DISPLAY OPTIONS-->
+<fieldset name="display"
+	label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_GROUP_DISPLAY_LABEL"
+>
+	<field name="item_heading" type="list" default="3" label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_TITLE_HEADING"
+			description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_TITLE_HEADING_DESCRIPTION">
+		<option value="0">--HIDE TITLE--</option>
+		<option value="1">JH1</option>
+		<option value="2">JH2</option>
+		<option value="3">JH3</option>
+		<option value="4">JH4</option>
+		<option value="5">JH5</option>
+		<option value="6">JH6</option>
+	</field>
+	<field name="keep_br" type="radio" default="0"
+		class="btn-group"
+		label="Keep HTML-BR (ignored in Blog)"
+		description="In einigen wenigen Fällen ist diese Einstellung sinnvoll. BR-Tags bleiben erhalten."
+	>
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field name="show_date" type="radio" default="0"
+		class="btn-group"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWDATE_LBL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWDATE_DESC"
+	>
+		<option value="1">JSHOW
+		</option>
+		<option value="0">JHIDE
+		</option>
+	</field>
+
+	<field name="show_date_field" type="list" default="created"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFIELD_LABEL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFIELD_DESC"
+	>
+		<option value="created">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_CREATED_VALUE
+		</option>
+		<option value="modified">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_MODIFIED_VALUE
+		</option>
+		<option value="publish_up">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_STARTPUBLISHING_VALUE
+		</option>
+	</field>
+
+	<field name="show_date_format" type="text"
+		default="Y-m-d H:i:s"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFIELDFORMAT_LABEL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFIELDFORMAT_DESC" />
+
+	<field name="show_category" type="radio" default="0"
+		class="btn-group"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWCATEGORY_LBL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWCATEGORY_DESC"
+	>
+		<option value="1">JSHOW
+		</option>
+		<option value="0">JHIDE
+		</option>
+	</field>
+
+	<field name="show_author" type="radio" default="0"
+		class="btn-group"
+		label="JGLOBAL_SHOW_AUTHOR_LABEL"
+description="JGLOBAL_SHOW_AUTHOR_DESC"
+	>
+		<option value="1">JSHOW
+		</option>
+		<option value="0">JHIDE
+		</option>
+	</field>
+
+	<field name="show_introtext" type="radio" default="0"
+		class="btn-group"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWINTROTEXT_LABEL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWINTROTEXT_DESC"
+	>
+		<option value="1">JSHOW
+		</option>
+		<option value="0">JHIDE</option>
+		<option value="2">HTML</option>
+	</field>
+
+	<field name="introtext_limit" type="text" default="100"
+		label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_INTROTEXTLIMIT_LABEL"
+		description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_INTROTEXTLIMIT_DESC" />
+
+	<field
+		name="show_readmore"
+		label="JGLOBAL_SHOW_READMORE_LABEL"
+		description="JGLOBAL_SHOW_READMORE_DESC"
+		type="radio"
+		default="0"
+		class="btn-group"
+	>
+		<option value="1">JSHOW
+		</option>
+		<option value="0">JHIDE
+		</option>
+	</field>
+
+	<field
+		name="show_readmore_title"
+		label="JGLOBAL_SHOW_READMORE_TITLE_LABEL"
+		description="JGLOBAL_SHOW_READMORE_TITLE_DESC"
+		type="radio"
+		default="1"
+		class="btn-group"
+	>
+		<option value="1">JSHOW</option>
+		<option value="0">JHIDE</option>
+	</field>
+
+	<field
+		name="readmore_limit"
+		type="text"
+		default="15"
+		label="JGLOBAL_SHOW_READMORE_LIMIT_LABEL"
+		description="JGLOBAL_SHOW_READMORE_LIMIT_DESC"
+	/>
+
+</fieldset><!--/DISPLAY OPTIONS-->
+
+
+
+
+			<fieldset name="dynamic"
+				label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_GROUP_DYNAMIC_LABEL"
+			>
+				<field name="show_on_article_page" type="radio"
+					class="btn-group"
+					default="0"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWONARTICLEPAGE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWONARTICLEPAGE_DESC"
+				>
+					<option value="1">JSHOW</option>
+					<option value="0">JHIDE</option>
+				</field>
+			</fieldset>
+
+<!--FILTERING-->
+<fieldset name="filtering" label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_GROUP_FILTERING_LABEL">
+				<field name="show_front" type="list" default="show"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWFEATURED_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWFEATURED_DESC"
+				>
+					<option value="show">JSHOW
+					</option>
+					<option value="hide">JHIDE
+					</option>
+					<option value="only">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ONLYFEATURED_VALUE
+					</option>
+				</field>
+
+				<field name="count" type="text" default="0"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_COUNT_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_COUNT_DESC" />
+
+				<field name="filteringspacer1" type="spacer" hr="true" />
+
+				<field name="category_filtering_type" type="list"
+					default="1"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_CATFILTERINGTYPE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_CATFILTERINGTYPE_DESC"
+				>
+					<option value="1">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_INCLUSIVE_VALUE
+					</option>
+					<option value="0">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_EXCLUSIVE_VALUE
+					</option>
+				</field>
+
+				<field name="catid" type="category" extension="com_content"
+					multiple="true" size="5"
+					label="JCATEGORY"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_CATEGORY_DESC"
+				>
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+
+				<field name="show_child_category_articles" type="list"
+					default="0"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWCHILDCATEGORYARTICLES_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_SHOWCHILDCATEGORYARTICLES_DESC"
+				>
+					<option value="1">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_INCLUDE_VALUE
+					</option>
+					<option value="0">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_EXCLUDE_VALUE
+					</option>
+				</field>
+
+				<field name="levels" type="text" default="1"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_CATDEPTH_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_CATDEPTH_DESC" />
+
+				<field name="filteringspacer2" type="spacer" hr="true" />
+
+				<field name="author_filtering_type" type="list"
+					default="1"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORFILTERING_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORFILTERING_DESC"
+				>
+					<option value="1">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_INCLUSIVE_VALUE
+					</option>
+					<option value="0">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_EXCLUSIVE_VALUE
+					</option>
+				</field>
+
+				<field name="created_by" type="sql"
+					multiple="true" size="5"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHOR_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHOR_DESC"
+					query="select id, name, username from #__users where id IN (select distinct(created_by) from #__content) order by name ASC"
+					key_field="id" value_field="name"
+				>
+					<option value="">JOPTION_SELECT_AUTHORS</option>
+				</field>
+
+				<field name="filteringspacer3" type="spacer" hr="true" />
+
+				<field name="author_alias_filtering_type" type="list"
+					default="1"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORALIASFILTERING_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORALIASFILTERING_DESC"
+				>
+					<option value="1">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_INCLUSIVE_VALUE
+					</option>
+					<option value="0">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_EXCLUSIVE_VALUE
+					</option>
+				</field>
+
+				<field name="created_by_alias" type="sql"
+					multiple="true" size="5"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORALIAS_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_AUTHORALIAS_DESC"
+					query="select distinct(created_by_alias) from #__content where created_by_alias != '' order by created_by_alias ASC"
+					key_field="created_by_alias" value_field="created_by_alias"
+				>
+					<option value="">JOPTION_SELECT_AUTHOR_ALIASES
+					</option>
+				</field>
+
+				<field name="filteringspacer4" type="spacer" hr="true" />
+
+	<field name="articles_ids" type="textarea"
+	cols="10" rows="3"
+	label="CATEGORYTRADITIONALGHSVS_EXCLUDEDARTICLES_LABEL"
+	description="CATEGORYTRADITIONALGHSVS_EXCLUDEDARTICLES_DESC" />
+
+	<field name="articles_ids_exclude" type="list" default=""
+		label="CATEGORYTRADITIONALGHSVS_FILTERINGTYPE_LBL"
+		description="CATEGORYTRADITIONALGHSVS_FILTERINGTYPE_DESC">
+		<option value="">Ignore entered article ids</option>
+		<option value="exclude">Exclude entered article ids</option>
+		<option value="include">Display only entered article ids</option>
+		<option value="hyped">Display only hyped articles (Ignore entered article ids)</option>
+	</field>
+
+
+				<field name="filteringspacer5" type="spacer" hr="true" />
+
+
+				<field name="date_filtering" type="list" default="off"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFILTERING_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATEFILTERING_DESC"
+				>
+					<option value="off">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_OFF_VALUE
+					</option>
+					<option value="range">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_DATERANGE_VALUE
+					</option>
+					<option value="relative">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_RELATIVEDAY_VALUE
+					</option>
+				</field>
+
+				<field name="date_field" type="list" default="a.created"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATERANGEFIELD_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_DATERANGEFIELD_DESC"
+				>
+					<option value="a.created">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_CREATED_VALUE
+					</option>
+					<option value="a.modified">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_MODIFIED_VALUE
+					</option>
+					<option value="a.publish_up">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_STARTPUBLISHING_VALUE
+					</option>
+				</field>
+
+				<field name="start_date_range" type="calendar"
+					format="%Y-%m-%d %H:%M:%S"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_STARTDATE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_STARTDATE_DESC"
+					size="22"
+					filter="user_utc" />
+
+				<field name="end_date_range" type="calendar"
+					format="%Y-%m-%d %H:%M:%S"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ENDDATE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ENDDATE_DESC"
+					size="22"
+					filter="user_utc" />
+
+				<field name="relative_date" type="text" default="30"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_RELATIVEDATE_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_RELATIVEDATE_DESC" />
+			</fieldset>
+
+			<fieldset name="ordering"
+				label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_GROUP_ORDERING_LABEL"
+			>
+				<field name="article_ordering" type="list"
+					default="a.created"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEORDERING_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEORDERING_DESC"
+				>
+					<option value="a.ordering">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ORDERING_VALUE
+					</option>
+					<option value="fp.ordering">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ORDERINGFEATURED_VALUE
+					</option>
+					<option value="a.title">JGLOBAL_TITLE
+					</option>
+					<option value="a.id">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ID_VALUE
+					</option>
+					<option value="a.alias">JFIELD_ALIAS_LABEL
+					</option>
+					<option value="a.created">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_CREATED_VALUE
+					</option>
+					<option value="modified">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_MODIFIED_VALUE
+					</option>
+					<option value="publish_up">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_STARTPUBLISHING_VALUE
+					</option>
+					<option value="a.publish_down">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_FINISHPUBLISHING_VALUE
+					</option>
+				</field>
+
+				<field name="article_ordering_direction" type="list"
+					default="DESC"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEORDERINGDIR_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEORDERINGDIR_DESC"
+				>
+					<option value="DESC">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_DESCENDING_VALUE
+					</option>
+					<option value="ASC">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ASCENDING_VALUE
+					</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="grouping"
+				label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_GROUP_GROUPING_LABEL"
+			>
+				<field name="article_grouping" type="list"
+					default="none"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEGROUPING_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEGROUPING_DESC"
+				>
+					<option value="none">JNONE
+					</option>
+					<option value="year">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_YEAR_VALUE
+					</option>
+					<option value="month_year">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_MONTHYEAR_VALUE
+					</option>
+					<option value="author">JAUTHOR
+					</option>
+					<option value="category_title">JCATEGORY
+					</option>
+				</field>
+
+				<field name="article_grouping_direction" type="list"
+					default="ksort"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEGROUPINGDIR_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_ARTICLEGROUPINGDIR_DESC"
+				>
+					<option value="krsort">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_DESCENDING_VALUE
+					</option>
+					<option value="ksort">MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_OPTION_ASCENDING_VALUE
+					</option>
+				</field>
+
+				<field name="month_year_format" type="text"
+					default="F Y"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MONTHYEARFORMAT_LABEL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MONTHYEARFORMAT_DESC" />
+			</fieldset>
+
+
+
+			<fieldset name="advanced">
+				<field name="layout" type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field name="moduleclass_sfx" type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field name="moduleclass_tmpl" type="text"
+					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_MODULECLASS_TMPL_LBL"
+					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_MODULECLASS_TMPL_DESC" />
+
+				<field name="owncache" type="list" default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC" >
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+					</option>
+				</field>
+
+				<field name="cache_time" type="text" default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

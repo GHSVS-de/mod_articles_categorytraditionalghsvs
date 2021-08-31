@@ -1,0 +1,78 @@
+{
+	"name": "mod_footerghsvs",
+	"nameReal": "mod_footerghsvs",
+	"filename": "mod_footerghsvs",
+	"version": "2021.08.31",
+	"versionCompare": "2021.08.26",
+	"update": {
+		"type": "module",
+		"folder": "",
+		"client": "site",
+		"tag": "stable",
+		"targetplatform": ".*"
+	},
+	"releaseTxt": {
+		"title": "Joomla site module mod_footerGhsvs"
+	},
+	"changelog": {
+		"projecturl": "https://github.com/GHSVS-de/mod_footerghsvs",
+		"infosDE": "https://github.com/GHSVS-de/mod_footerghsvs#readme",
+		"infosEN": "",
+		"docsDE": "",
+		"docsEN": "",
+		"lastTests": [
+			"PHP8",
+			"J3.10",
+			"J4.0"
+		]
+	},
+	"minimumPhp": "7.3.0",
+	"maximumPhp": "8.99999.99999",
+	"minimumJoomla": "3.9.24",
+	"maximumJoomla": "4.9999.9999",
+	"allowDowngrades": "1",
+	"creationDate": "2017-10-07",
+	"licenseLong": "GNU General Public License version 3 or later; see LICENSE.txt.",
+	"copyright": "(C) 2017, G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)",
+	"author": {
+		"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
+		"email": "",
+		"url": "https://www.ghsvs.de"
+	},
+	"contributors": [
+		{
+			"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
+			"email": "",
+			"url": "https://www.ghsvs.de"
+		}
+	],
+	"bugs": "https://github.com/GHSVS-de/mod_footerghsvs/issues",
+	"homepage": "https://github.com/GHSVS-de/mod_footerghsvs#readme",
+	"keywords": [
+		"joomla",
+		"site module",
+		"copyright",
+		"footer"
+	],
+	"private": false,
+	"description": "Joomla site module. Display copyright informations, e.g. in page footer.",
+	"license": "GPL-3.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/GHSVS-de/mod_footerghsvs.git"
+	},
+	"scripts": {
+		"g-build": "node build.js",
+		"g-npm-update-check": "ncu",
+		"g-ncu-override-json": "ncu -u"
+	},
+	"dependencies": {
+		"npm-check-updates": "^11.8.3"
+	},
+	"devDependencies": {
+		"adm-zip": "0.5.5",
+		"fs-extra": "10.0.0",
+		"rimraf": "3.0.2"
+	},
+	"browserslist": []
+}
