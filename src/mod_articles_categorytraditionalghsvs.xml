@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" client="site" method="upgrade">
-	<name>mod_articles_categorytraditionalghsvs</name>
-	<author>Joomla! Project; Fallback by GHSVS</author>
-	<creationDate>February 2010; edit 2014-04 www.ghsvs.de</creationDate>
-	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail></authorEmail>
-	<authorUrl>www.joomla.org; edit www.ghsvs.de</authorUrl>
-	<!--based on original version 3.0.0-->
-	<version>2021.08.17</version>
-<versionHistory>
-2015.04.17:
-2015.07.26:
-Neuer tmpl-Override blogcarousel.php (Bootstrap-Carousel).
-Neue OPTION 'hyped' für articles_ids_exclude.
-2015.08.23: Neu: $moduleclass_tmpl, show_concated_tags
-2021.08.17: Fix for Joomla 4 and J3 in helper.php.
-</versionHistory>
-	<description>MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_XML_DESCRIPTION</description>
+<extension type="{{type}}" client="{{client}}" method="upgrade">
+	<name>{{nameUpper}}</name>
+	<author>{{authorName}}</author>
+	<creationDate>{{creationDate}}</creationDate>
+	<copyright>{{copyright}}</copyright>
+	<license>{{licenseLong}}</license>
+	<authorUrl>{{authorUrl}}</authorUrl>
+	<version>{{version}}</version>
+	<description>{{nameUpper}}_XML_DESCRIPTION</description>
+
+	<updateservers><server type="extension" priority="1" name="{{nameUpper}}">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{name}}-update.xml</server></updateservers>
+
+	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/{{name}}-changelog.xml</changelogurl>
+
+	<infourl>https://updates.ghsvs.de/changelog.php?file={{name}}</infourl>
+
+	<scriptfile>installerScript.php</scriptfile>
+	<minimumPhp>{{minimumPhp}}</minimumPhp>
+	<maximumPhp>{{maximumPhp}}</maximumPhp>
+	<minimumJoomla>{{minimumJoomla}}</minimumJoomla>
+	<maximumJoomla>{{maximumJoomla}}</maximumJoomla>
+	<allowDowngrades>{{allowDowngrades}}</allowDowngrades>
 
 	<files>
-		<filename module="mod_articles_categorytraditionalghsvs">mod_articles_categorytraditionalghsvs.php</filename>
-		<folder>tmpl</folder>
-		<filename>helper.php</filename>
-		<filename>index.html</filename>
+		<filename module="{{name}}">{{name}}.php</filename>
+		<filename>installerScript.php</filename>
+		<filename>LICENSE.txt</filename>
 		<folder>language</folder>
-		<folder>media2copy</folder>
-		<filename>mod_articles_categorytraditionalghsvs.xml</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
 	</files>
 
-	<media folder="copy2media" destination="mod_articles_categorytraditionalghsvs">
-		<folder>css</folder>
-		<folder>js</folder>
-		<filename>index.html</filename>
-	</media>
+	<namespace path="src">Joomla\Module\ArticlesCategoryTraditionalGhsvs</namespace>
 
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-
 
 				<field name="mode" type="list" default="normal"
 					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MODE_LABEL"
@@ -632,29 +629,33 @@ description="JGLOBAL_SHOW_AUTHOR_DESC"
 					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_FIELD_MONTHYEARFORMAT_DESC" />
 			</fieldset>
 
-
-
 			<fieldset name="advanced">
-				<field name="layout" type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 
-				<field name="moduleclass_sfx" type="textarea" rows="3"
-					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="layout" type="modulelayout" validate="moduleLayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"/>
+
+				<field name="moduleclass_sfx" type="textarea" filter="string"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"/>
 
 				<field name="moduleclass_tmpl" type="text"
 					label="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_MODULECLASS_TMPL_LBL"
 					description="MOD_ARTICLES_CATEGORYTRADITIONALGHSVS_MODULECLASS_TMPL_DESC" />
 
-				<field name="owncache" type="list" default="1"
-					label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC" >
+				<field name="cache" type="list" default="1" filter="integer"
+					validate="options"
+					label="COM_MODULES_FIELD_CACHING_LABEL">
 					<option value="1">JGLOBAL_USE_GLOBAL</option>
-					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING
-					</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
 
-				<field name="cache_time" type="text" default="900"
-					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field name="cache_time" type="number" default="900" filter="integer"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" />
+
+				<field name="cachemode" type="hidden" default="static">
+					<option value="static"></option>
+				</field>
+
 			</fieldset>
 		</fields>
 	</config>

@@ -1,39 +1,41 @@
 <?php
-defined('_JEXEC') or die;
+namespace Joomla\Module\ArticlesCategoryTraditionalGhsvs\Site\Helper;
+
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Access\Access;
+use Joomla\CMS\Component\ComponentHelper;
 
 // Quick fix because otherwise setState() fails.
 if (version_compare(JVERSION, '4', 'lt'))
 {
-	$com_path = JPATH_SITE.'/components/com_content/';
-	JModelLegacy::addIncludePath($com_path . '/models', 'ContentModel');
+	JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_content/models',
+		'ContentModel');
 }
 
-/**
- * Helper for mod_articles_categorytraditionalghsvs
- *
- * @package     Joomla.Site
- * @subpackage  mod_articles_categorytraditionalghsvs
- */
-abstract class ModArticlesCategoryTraditionalGhsvsHelper{
-	public static function getList(&$params){
-
+class ArticlesCategoryTraditionalGhsvsHelper
+{
+	public static function getList(&$params)
+	{
 		$blog = $params->get('blog', 1);
-		$count = (int) ($blog ? $params->get('blogcount', 6): $params->get('count', 0));
+		$count = (int) ($blog ? $params->get('blogcount', 6)
+			: $params->get('count', 0));
 		$mode = ($blog ? 'normal' : $params->get('mode', 'normal'));
 
 		// Ist nicht gleich show_intro_text!!!!
 		// Deshalb ist das Müll, wie man unten sieht.
-		$show_intro = ($blog ? $params->get('show_intro', 1):$params->get('show_introtext', 0));
+		$show_intro = ($blog ? $params->get('show_intro', 1)
+			: $params->get('show_introtext', 0));
 		$introtext_limit = ($blog ? 500000 : $params->get('introtext_limit', 100));
 		$show_date = ($blog ? 0 : $params->get('show_date', 0));
-  $keep_br = $params->get('keep_br', '');
+		$keep_br = $params->get('keep_br', '');
 
 		// Get an instance of the generic articles model
-		$articles = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		$articles = JModelLegacy::getInstance('Articles', 'ContentModel',
+			array('ignore_request' => true));
 
 		// Set application parameters in model
 		$app = Factory::getApplication();
@@ -44,10 +46,8 @@ abstract class ModArticlesCategoryTraditionalGhsvsHelper{
 		$articles->setState('list.start', 0);
 		$articles->setState('list.limit', $count);
 		$articles->setState('filter.published', 1);
-
-		// Access filter
-		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
-		$authorised = JAccess::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+		$access = !ComponentHelper::getParams('com_content')->get('show_noauth');
+		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
 		$articles->setState('filter.access', $access);
 
 		// Prep for Normal or Dynamic Modes
