@@ -1,14 +1,16 @@
-# mod_footerghsvs
- Joomla site module. Display copyright informations, e.g. in page footer.
+# mod_articles_categorytraditionalghsvs
+- Joomla site module from early days but still used on some sites. Whyever.
+- Absolutely no idea why it was created.
+- I think Joomla changed the `mod_articles_category` somehow and one needed old settings and behavior.
+- Now we have to make it compatible with Joomla 4.
 
  ##
- - Only german labels yet, maybe forever.
 
 -----------------------------------------------------
 
 # My personal build procedure (WSL 1, Debian, Win 10)
 - Prepare/adapt `./package.json`.
-- `cd /mnt/z/git-kram/mod_footerghsvs`
+- `cd /mnt/z/git-kram/mod_articles_categorytraditionalghsvs`
 
 ## node/npm updates/installation
 - `npm run g-npm-update-check` or (faster) `ncu`
