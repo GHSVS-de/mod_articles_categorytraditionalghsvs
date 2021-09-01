@@ -1,21 +1,9 @@
 <?php defined('_JEXEC') or die;
-
-use Joomla\Module\ArticlesCategoryTraditionalGhsvs\Site\Helper\ArticlesCategoryTraditionalGhsvsHelper;
-
 // Unterseiten-Pagination der Startseite ausschließen.
 $start = (int) JUri::getInstance()->getVar('start');
 if ($start)
 {
  return;
-}
-
-// Register LibHelpGhsvs
-if (!defined('GHSVS_LIBRARY_INCLUDED') && ((@include_once(JPATH_LIBRARIES . '/ghsvs/include.php')) === false))
-{
-	$msg = JText::sprintf('COULD_NOT_LOAD_NEEDED_LIBRARY_LIB_GHSVS', str_replace(JPATH_SITE, '', __FILE__), __LINE__);
-	$app = JFactory::getApplication();
-	if ($app->isSite()) throw new Exception($msg, 500);
-	$app->enqueueMessage($msg, 'error');
 }
 
 // $list hat immer Items, wenn hier überhaupt ankommt.
@@ -27,7 +15,7 @@ $blogcolumns = (int) $params->get('blogcolumns', 3);
 	Carousel-.item	nicht vollständig gefüllt ist, hüpft die Seite.
  Ich muss also $rest fehlende, leere Spans hinzufügen.
 	Damit sie nach Möglichkeit nicht leer sind, versuche zufällige
-	bei hype-View nicht gehypte Haupteinträge zuzuladen.
+	bei hype-View nicht gehypte Haupteinträge zuzuladen. 
 	$rest gibt z.B. 1 bei 10 Items und 3 Spalten.
 	Fehlen also noch 2, um das .item zu füllen.
 */
@@ -38,11 +26,11 @@ if (
  $rest = $blogcolumns - $rest;
 	$params->set('article_ordering', 'rand()');
 	$params->set('show_front', 'only');
-	$params->set('articles_ids', implode("\r\n", PlgSystemArticleSubtitleGhsvs::getHypedArticles()));
+	$params->set('articles_ids', implode("\r\n", TplHelpGhsvs::getHypedArticles()));
 	$params->set('articles_ids_exclude', 'exclude');
-
+	
 	$params->set('blogcount', $rest);
-	$restList = ArticlesCategoryTraditionalGhsvsHelper::getList($params);
+	$restList = ModArticlesCategoryTraditionalGhsvsHelper::getList($params);
 	if (!empty($restList))
 	{
 		foreach ($restList as $r)
@@ -79,7 +67,7 @@ if ($needPagination)
 		$js .= '
  $(window).load(function(){
   $(' . $carouselSelectorJS . ').carousel({"interval": 6000,"pause": "false"});
-
+		
 		$(".cyclePauseButton' . $carouselSelector . '").click(function(){
 			var aktion = $(this).attr("data-playpause");
 			$(' . $carouselSelectorJS . ').carousel(aktion);
@@ -90,7 +78,7 @@ if ($needPagination)
 			 .removeClass((aktion == "cycle" ? "btn-success" : "btn-danger"))
 				.addClass((aktion == "cycle" ? "btn-danger" : "btn-success"));;
 		});';
-
+	 
 if (JPluginHelper::isEnabled('system', 'lazyloadforjoomla'))
 {
 	$js .= '
@@ -150,7 +138,7 @@ if($introcount) : ?>
 			$link = new JUri($link1);
 			$link->setVar('return', base64_encode($returnURL));
 		endif;
-
+		
   $rowcount = ((int) $key % $blogcolumns) + 1;
   if($rowcount == 1){
    $row = $counter / $blogcolumns;
@@ -177,7 +165,7 @@ if($introcount) : ?>
 <?php
 if ($params->get('show_title', 1))
 {
- $item->params->set('mask_pageheaderclass_ghsvs', 1);
+ $item->params->set('mask_pageheaderclass_ghsvs', true);
 	$item->params->set('show_print_icon', false);
 	$item->params->set('show_email_icon', false);
  echo JLayoutHelper::render('ghsvs.page_header_n_icons', array('item' => $item, 'print' => false));
@@ -198,7 +186,7 @@ if ($params->get('show_image_intro', 0))
 // Alle Bilder entfernen.
 if ($params->get('clearimgtag_ghsvs', 1))
 {
-	$item->introtext = JFilterOutput::stripImages($item->introtext);
+ TplHelpGhsvs::ClearIMGTag($item->introtext);
 }
 // Introtext kürzen
 $limit = (int) $params->get('introtext_limit', 250);
@@ -241,7 +229,7 @@ else
   <div class="span<?php echo round((12 / $blogcolumns))?> itemContainer">
 		<div class="singleitem BOOTSTRAPCAROUSELRESIZE<?php echo (!$counter ? ' CAROUSELLIMITER' : '');?>">
 		</div><!--/singleitem-->
-  </div><!--/span<?php echo round((12 / $blogcolumns))?>-->
+  </div><!--/span<?php echo round((12 / $blogcolumns))?>-->				
 			<?php
 			}
 		}
@@ -252,10 +240,11 @@ else
   endif;
  endforeach; ?>
  </div><!--/carousel-inner-->
-
-
-
+ 
+  
+  
 
 </div><!--/myCarousel<?php echo $module->id;?>" blogcarousel<?php echo $module->id;?> slide-->
 <?php
 endif;#$introcount ?>
+
