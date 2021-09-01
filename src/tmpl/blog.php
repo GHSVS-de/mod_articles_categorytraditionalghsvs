@@ -1,16 +1,5 @@
-<?php defined('_JEXEC') or die;
-
-// Register LibHelpGhsvs
-if (!defined('GHSVS_LIBRARY_INCLUDED') && ((@include_once(JPATH_LIBRARIES . '/ghsvs/include.php')) === false))
-{
-	$msg = JText::sprintf('COULD_NOT_LOAD_NEEDED_LIBRARY_LIB_GHSVS', str_replace(JPATH_SITE, '', __FILE__), __LINE__);
-	$app = JFactory::getApplication();
-	if ($app->isSite()) throw new Exception($msg, 500);
-	$app->enqueueMessage($msg, 'error');
-}
-
-?>
-<div class="blog<?php echo $moduleclass_tmpl; ?>">
+<?php defined('_JEXEC') or die;?>
+<div class="blog">
 <?php
 $introcount = (count($list));
 $counter =0;
@@ -19,7 +8,6 @@ $blogcolumns = (int)$params->get('blogcolumns', 3);
 <?php
 if($introcount) :
  foreach ($list as $key => &$item) :
-
 	 $item->params->merge($params);
   $rowcount = ((int) $key % $blogcolumns) + 1;
 		if($rowcount == 1){
@@ -64,26 +52,6 @@ if($introcount) :
   );
 ?>
 <?php
-  if($useDefList){
-   echo JLayoutHelper::render(
-	   'joomla.content.info_block.block',
-	   array(
-	    'item' => $item,
-		   'params' => $item->params,
-		   'position' => 'above'
-				)
-	  );
-  }
-?>
-<?php
-	 if ($item->params->get('show_concated_tags', 0) )
-		{
-	  LibHelpGhsvs::setTagsNamesToItem($item);
-			if ($item->concatedTagsGhsvs)
-			{
-		  echo '<p><span class="label label-info">'.JText::_('JTAG') . ':</span> ' . $item->concatedTagsGhsvs.'</p>';
-			}
-		}
   if($useDefList){
    echo JLayoutHelper::render(
 	   'joomla.content.info_block.block',
