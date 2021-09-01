@@ -12,7 +12,8 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Administrator\Extension\ContentComponent;
 //use Joomla\Component\Content\Site\Helper\RouteHelper;
-use Joomla\String\StringHelper;
+//use Joomla\String\StringHelper;
+use Joomla\Utilities\ArrayHelper;
 
 // Quick fix because otherwise setState() fails.
 if (version_compare(JVERSION, '4', 'lt'))
@@ -200,7 +201,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 
 		if (is_array($articles_ids) && $articles_ids_exclude)
 		{
-			JArrayHelper::toInteger($articles_ids);
+			ArrayHelper::toInteger($articles_ids);
 			$articles_ids = array_unique($articles_ids);
 			$articles->setState('filter.article_id', $articles_ids);
 			$articles->setState(
