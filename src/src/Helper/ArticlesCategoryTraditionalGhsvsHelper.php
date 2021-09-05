@@ -11,8 +11,6 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Administrator\Extension\ContentComponent;
-//use Joomla\Component\Content\Site\Helper\RouteHelper;
-//use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
 
 // Quick fix because otherwise setState() fails.
@@ -293,71 +291,13 @@ class ArticlesCategoryTraditionalGhsvsHelper
 			$item->displayHits = $show_hits ? $item->hits : '';
 			$item->displayAuthorName = $show_author ? $item->author : '';
 
-   // Siehe oben Kommentar zu show_intro. Die Abfrage dort ist Müll,
-			// da in dieser Schleife Kram abgefragt wird, der alternativ
-			// zum Introtext angezeigt werden soll.
-			if ($show_intro)
+			if (!$blog)
 			{
-
-				if(!$blog){
-     $item->introtext = JHtml::_('content.prepare', $item->introtext, '', 'mod_articles_categorytraditionalghsvs.content');
-				 $item->introtext = self::_cleanIntrotext($item->introtext, $keep_br);
-				}
-				else
-				{
-
-     $app->triggerEvent(
-						'onGhsvsModule',
-						array(
-							'mod_articles_categorytraditionalghsvs.content',
-							&$item,
-							&$params,
-							$page = 0
-						)
-					);
-				}
-    $results = $app->triggerEvent(
-				 'onContentAfterDisplay',
-					array(
-					 'com_content.article',
-					 &$item,
-					 &$params,
-					 1
-					)
-				);
-			 $item->afterDisplayTitle = trim(implode("\n", $results));
-
-			 $results = $app->triggerEvent(
-				 'onContentBeforeDisplay',
-					array(
-					 'com_content.article',
-					 &$item,
-					 &$params,
-					 1
-					)
-				);
-			 $item->beforeDisplayContent = trim(implode("\n", $results));
-
-    $results = $app->triggerEvent(
-				 'onContentAfterDisplay',
-					array(
-					 'com_content.article',
-						&$item,
-						&$params,
-						$offset=0 //????
-					)
-				);
-		  $item->afterDisplayContent = trim(implode("\n", $results));
+				$item->displayIntrotext = $show_intro
+					? self::truncate($item->introtext, $introtext_limit) : '';
 			}
 
-
-			if(!$blog){
-			 $item->displayIntrotext = $show_intro ? self::truncate($item->introtext, $introtext_limit) : '';
-			}else{
-				#$item->displayIntrotext ='';
-			}
 			$item->displayReadmore = $item->alternative_readmore;
-
 		}
 
 		return $items;
