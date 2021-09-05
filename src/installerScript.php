@@ -23,6 +23,7 @@ class mod_articles_categoryTraditionalGhsvsInstallerScript extends InstallerScri
 	 */
 	protected $deleteFiles = [
 		'/modules/mod_articles_categorytraditionalghsvs/helper.php',
+		'/modules/mod_articles_categorytraditionalghsvs/tmpl/blogcarousel.php',
 	];
 
 	/**
