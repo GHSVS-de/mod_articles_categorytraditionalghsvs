@@ -502,7 +502,6 @@ description="JGLOBAL_SHOW_AUTHOR_DESC"
 		<option value="">Ignore entered article ids</option>
 		<option value="exclude">Exclude entered article ids</option>
 		<option value="include">Display only entered article ids</option>
-		<option value="hyped">Display only hyped articles (Ignore entered article ids)</option>
 	</field>
 
 

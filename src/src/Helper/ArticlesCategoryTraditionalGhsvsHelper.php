@@ -172,24 +172,16 @@ class ArticlesCategoryTraditionalGhsvsHelper
 		$articles->setState('filter.author_alias', $params->get('created_by_alias', ""));
 		$articles->setState('filter.author_alias.include', $params->get('author_alias_filtering_type', 1));
 
-		// String 'exclude' || 'include' || 'hyped'
+		// String 'exclude' || 'include'
 		$articles_ids_exclude = $params->get('articles_ids_exclude', '');
 
 		// Das fiese ist dass 'include', 'exclude' immer ein
 		// Array ( [0] => ) zurückgibt, auch wenn nichts in Textarea.
 		// Also muss ich das hier auch simulieren.
 		// Aber nur so wird 'filter.article_id.include' auch befüllt,
-		// so, dass keine $items bei include oder hyped, wenn keine
+		// so, dass keine $items bei include, wenn keine
 		// Eingäbe in Textarea bzw. kein Datensätz gefunden.
-		if ($articles_ids_exclude == 'hyped')
-		{
-			$articles_ids = PlgSystemArticleSubtitleGhsvs::getHypedArticles();
-			if (!count($articles_ids))
-			{
-				$articles_ids = array(false);
-			}
-		}
-		elseif ($articles_ids_exclude)
+		if ($articles_ids_exclude)
 		{
 			$articles_ids = $params->get('articles_ids', '');
 			$articles_ids = explode("\r\n", $articles_ids);
@@ -207,7 +199,7 @@ class ArticlesCategoryTraditionalGhsvsHelper
 			$articles->setState(
 			 'filter.article_id.include',
 				(in_array($articles_ids_exclude, array('exclude'))  ? false:true)
-			); // false:Exclude, true:only included/hyped ones
+			);
 		}
 
 		$date_filtering = $params->get('date_filtering', 'off');
