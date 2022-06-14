@@ -64,9 +64,9 @@ if (!empty($list))
 {
 	$grouped = false;
 
-	$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+	$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx', ''));
 
-	$moduleclass_tmpl = htmlspecialchars($params->get('moduleclass_tmpl'));
+	$moduleclass_tmpl = htmlspecialchars($params->get('moduleclass_tmpl', ''));
 
 	$item_heading = $params->get('item_heading');
 
