@@ -2,17 +2,24 @@
 	"name": "mod_articles_categorytraditionalghsvs",
 	"nameReal": "mod_articles_categorytraditionalghsvs",
 	"filename": "mod_articles_categorytraditionalghsvs",
-	"version": "2021.09.07",
-	"versionCompare": "2021.09.05",
+	"version": "2022.06.14",
+	"versionCompare": "2021.09.07",
 	"update": {
 		"type": "module",
 		"folder": "",
 		"client": "site",
 		"tag": "stable",
-		"targetplatform": ".*"
+		"targetplatform": [
+			"3.*",
+			"4.*"
+		],
+		"namespace": ""
 	},
 	"releaseTxt": {
-		"title": "Joomla site module mod_articles_categoryTraditionalGhsvs"
+		"title": "Joomla site module mod_articles_categoryTraditionalGhsvs",
+		"requires": [],
+		"uses": [],
+		"language": []
 	},
 	"changelog": {
 		"projecturl": "https://github.com/GHSVS-de/mod_articles_categorytraditionalghsvs",
@@ -21,10 +28,11 @@
 		"docsDE": "",
 		"docsEN": "",
 		"lastTests": [
-			"PHP 8",
+			"PHP 8.0",
+			"PHP 8.1",
 			"PHP 7.4",
 			"Joomla 3.10",
-			"Jommla 4.0"
+			"Jommla 4.1"
 		]
 	},
 	"minimumPhp": "7.3.0",
@@ -37,14 +45,13 @@
 	"copyright": "(C) 2014, G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)",
 	"author": {
 		"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
-		"email": "",
-		"url": "https://www.ghsvs.de"
+		"url": "https://ghsvs.de"
 	},
 	"contributors": [
 		{
 			"name": "G@HService Berlin Neukölln, Volkmar Volli Schlothauer",
 			"email": "",
-			"url": "https://www.ghsvs.de"
+			"url": "https://ghsvs.de"
 		}
 	],
 	"bugs": "https://github.com/GHSVS-de/mod_articles_categorytraditionalghsvs/issues",
@@ -68,9 +75,8 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"adm-zip": "^0.5.9",
-		"fs-extra": "^10.1.0",
-		"rimraf": "3.0.2"
+		"fs-extra": "10.1.0",
+		"picocolors": "^1.0.0"
 	},
 	"browserslist": []
 }
